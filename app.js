@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!link) return;
     const href = link.dataset.href;
     if (!href) return;
-    visor.src   = href;     // carga en iframe
-    openNew.href= href;     // abre en pestaña nueva
+    visor.src   = href;     
+    openNew.href= href;     
     setActive(link);
-    // actualiza el hash sin “saltar” la página
+   
     history.replaceState(null, "", link.getAttribute("href"));
   }
 
-  // delegación de eventos (un solo listener)
+  
   menu.addEventListener("click", (e) => {
     const a = e.target.closest(".menu-link");
     if (!a) return;
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadExercise(a);
   });
 
-  // carga inicial por hash o el primero
+ 
   const initial =
     document.querySelector(`.menu-link[href="${location.hash}"]`) ||
     document.querySelector(".menu-link");
