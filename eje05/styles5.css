@@ -12,3 +12,11 @@ p {
     padding: 6px; 
     border: 1px solid #e5e7eb; 
 }
+
+li.done .text {
+  color: green;
+}
+li.done button[aria-label="Marcar realizada"] {
+  background-color: orange;
+  color: white;
+}
