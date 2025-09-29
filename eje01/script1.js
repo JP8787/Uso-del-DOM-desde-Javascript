@@ -1,9 +1,9 @@
-const divInfo = document.getElementById("info");
-console.log("Contenido del div info:", divInfo.textContent);
+const divInfo = document.getElementById("info")
+console.log("contenido del div info:", divInfo.textContent)
 
-const detalle = document.querySelector(".detalle");
-detalle.textContent = "Este es un detalle modificado";
+const detalle = document.querySelector(".detalle")
+detalle.textContent = "este es un detalle modificado"
 
 document.querySelectorAll("p").forEach(p => {
-  p.style.backgroundColor = "lightblue";
-});
+  p.style.backgroundColor = "lightblue"
+})

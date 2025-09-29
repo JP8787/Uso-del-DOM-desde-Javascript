@@ -1,14 +1,14 @@
 function crearParrafo() {
-  const nuevoP = document.createElement("p");
-  nuevoP.textContent = "Este es un párrafo creado dinámicamente";
-  nuevoP.className = "mb-0";
-  document.querySelector(".card").appendChild(nuevoP);
+  const nuevo = document.createElement("p")
+  nuevo.textContent = "Este es un párrafo creado dinámicamente"
+  nuevo.className = "mb-0"
+  document.querySelector(".card").appendChild(nuevo)
 }
 
 crearParrafo(); 
-document.getElementById("crear").addEventListener("click", crearParrafo);
+document.getElementById("crear").addEventListener("click", crearParrafo)
 
 document.getElementById("eliminar").addEventListener("click", () => {
-  const primerP = document.querySelector(".card p");
-  if (primerP) primerP.remove();
-});
+  const primerp = document.querySelector(".card p")
+  if (primerp) primerp.remove()
+})
