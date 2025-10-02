@@ -1,0 +1,74 @@
+:root {
+  --blue: #0d6efd;
+  --gray-050: #f5f6f8;
+  --gray-200: #d7dbe2;
+  --gray-700: #2f3540;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  background: var(--gray-050);
+  color: var(--gray-700);
+  font-family: "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 16px;
+}
+
+.layout {
+  width: min(600px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  border: 1px solid var(--gray-200);
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--gray-700);
+}
+
+.pill.primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.pill.danger {
+  background: var(--gray-200);
+}
+
+.list-panel {
+  min-height: 200px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-panel p {
+  margin: 0;
+  padding: 8px 10px;
+  background: var(--gray-200);
+  border-radius: 4px;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}

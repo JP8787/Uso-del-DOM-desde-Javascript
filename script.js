@@ -1,35 +1,62 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const menu   = document.getElementById("menu-ejercicio")
-  const visor  = document.getElementById("visor")
-  const openNew= document.getElementById("open-new")
+  const menu = document.querySelector("#menu-ejercicio");
+  const frame = document.querySelector("#visor");
+  const externalLink = document.querySelector("#open-new");
 
-  function setActive(link) {
-    document.querySelectorAll(".menu-link").forEach(a => a.classList.remove("active"))
-    if (link) link.classList.add("active")
-  }
+  if (!menu || !frame) return;
 
-  function loadExercise(link) {
-    if (!link) return
-    const href = link.dataset.href
-    if (!href) return
-    visor.src   = href    
-    openNew.href= href  
-    setActive(link)
-   
-    history.replaceState(null, "", link.getAttribute("href"))
-  }
+  const buttons = Array.from(menu.querySelectorAll("button[data-src]"));
+  if (!buttons.length) return;
 
-  
-  menu.addEventListener("click", (e) => {
-    const a = e.target.closest(".menu-link")
-    if (!a) return
-    e.preventDefault()
-    loadExercise(a)
-  })
+  const cleanHash = (hash) => (hash && hash.startsWith("#")) ? hash.slice(1) : hash;
 
-  const initial =
-    document.querySelector(`.menu-link[href="${location.hash}"]`) ||
-    document.querySelector(".menu-link");
+  const applyState = (button, active) => {
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  };
 
-  loadExercise(initial)
+  const markActive = (current) => {
+    buttons.forEach((button) => applyState(button, button === current));
+  };
+
+  const pickBySlug = (slug) => buttons.find((button) => button.dataset.slug === slug);
+
+  const showExercise = (button) => {
+    if (!button) return;
+
+    const source = button.dataset.src;
+    if (source) {
+      frame.setAttribute("src", source);
+      if (externalLink) {
+        externalLink.setAttribute("href", source);
+      }
+    }
+
+    markActive(button);
+
+    const slug = button.dataset.slug;
+    if (slug) {
+      const targetHash = `#${slug}`;
+      if (targetHash !== window.location.hash) {
+        history.replaceState(null, "", targetHash);
+      }
+    }
+  };
+
+  menu.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-src]");
+    if (!button) return;
+    showExercise(button);
+  });
+
+  window.addEventListener("hashchange", () => {
+    const slug = cleanHash(window.location.hash);
+    const matching = pickBySlug(slug);
+    if (matching) {
+      showExercise(matching);
+    }
+  });
+
+  const initial = pickBySlug(cleanHash(window.location.hash)) || buttons[0];
+  showExercise(initial);
 });

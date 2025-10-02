@@ -1,0 +1,60 @@
+:root {
+  --blue: #0d6efd;
+  --gray-050: #f5f6f8;
+  --gray-200: #d7dbe2;
+  --gray-700: #2f3540;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  background: var(--gray-050);
+  color: var(--gray-700);
+  font-family: "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 16px;
+}
+
+.layout {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.alert {
+  padding: 16px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  font-weight: 600;
+}
+
+.alert-secondary {
+  background: var(--gray-200);
+}
+
+.alert-primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.pill {
+  align-self: flex-start;
+  padding: 10px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-700);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}

@@ -1,164 +1,102 @@
-* {
-    box-sizing: border-box;
+:root {
+  --blue: #0d6efd;
+  --gray-050: #f5f6f8;
+  --gray-100: #eceff3;
+  --gray-200: #d7dbe2;
+  --gray-500: #6c757d;
+  --gray-700: #2f3540;
+  --white: #ffffff;
 }
 
-:root {
-    --page-bg: #f4f6fb;
-    --panel-bg: #ffffff;
-    --accent: #2563eb;
-    --accent-dark: #1d4ed8;
-    --border: #d8dee9;
-    --text: #1f2933;
-    --muted: #6b7280;
+* {
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    background: var(--page-bg);
-    color: var(--text);
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    line-height: 1.5;
+  margin: 0;
+  background: var(--gray-050);
+  color: var(--gray-700);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
 }
 
-.page-header {
-    background: var(--panel-bg);
-    border-bottom: 1px solid var(--border);
+.app-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
 }
 
-.header-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+.app-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gray-700);
 }
 
-.header-content h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
+.menu-panel,
+.viewer-panel {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
 }
 
-.header-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 6px;
-    background: var(--accent);
-    color: #f8fafc;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
+.menu-panel .card-body,
+.viewer-panel .card-body {
+  padding: 20px;
 }
 
-.header-link:hover {
-    background: var(--accent-dark);
+#menu-ejercicio {
+  display: grid;
+  gap: 10px;
 }
 
-.page-body {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px;
-    display: flex;
-    gap: 24px;
+.menu-item {
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
 }
 
-.sidebar {
-    flex: 0 0 220px;
-    background: var(--panel-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
+.menu-item:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
 
-.sidebar-title {
-    margin: 0 0 12px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
+.menu-item.is-active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
 }
 
-.exercise-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.viewer-panel iframe {
+  width: 100%;
+  height: 70vh;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  background: var(--white);
 }
 
-.menu-link {
-    display: block;
-    padding: 10px 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--text);
-    border: 1px solid var(--border);
-    background: #f8fafc;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+.viewer-note {
+  color: var(--gray-500);
 }
 
-.menu-link:hover {
-    background: var(--accent);
-    color: #ffffff;
-    border-color: var(--accent);
+.btn-link {
+  color: var(--blue);
+  padding-left: 0;
 }
 
-.menu-link.active {
-    background: var(--accent);
-    color: #ffffff;
-    border-color: var(--accent);
+.btn-link:hover,
+.btn-link:focus {
+  color: var(--blue);
 }
 
-.viewer {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-#visor {
-    width: 100%;
-    height: 70vh;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: #ffffff;
-}
-
-.viewer-warning {
-    margin-top: 12px;
-    font-size: 0.875rem;
-    color: #b91c1c;
-}
-
-@media (max-width: 900px) {
-    .page-body {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-    }
-
-    #visor {
-        height: 60vh;
-    }
-}
-
-@media (max-width: 600px) {
-    .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .header-link {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .page-body {
-        padding: 16px;
-    }
+@media (max-width: 576px) {
+  .viewer-panel iframe {
+    height: 60vh;
+  }
 }
