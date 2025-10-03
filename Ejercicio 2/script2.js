@@ -1,4 +1,3 @@
-
 window.addEventListener('load', function() {
   const todosLosEnlaces = document.querySelectorAll('a');
  
