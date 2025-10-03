@@ -1,62 +1,97 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const menu = document.querySelector("#menu-ejercicio");
-  const frame = document.querySelector("#visor");
-  const externalLink = document.querySelector("#open-new");
+document.addEventListener('DOMContentLoaded', function() {
+  
+  const menuContenedor = document.getElementById('menu-ejercicio');
+  const iframeVisor = document.getElementById('visor');
+  if (!menuContenedor || !iframeVisor) return;
+  const todosLosBotones = menuContenedor.querySelectorAll('button[data-src]');
 
-  if (!menu || !frame) return;
+  
+  function limpiarHash(hashURL) {
+    if (hashURL && hashURL.charAt(0) === '#') {
+      return hashURL.substring(1);
+    }
+    return hashURL;
+  }
 
-  const buttons = Array.from(menu.querySelectorAll("button[data-src]"));
-  if (!buttons.length) return;
+  
+  function actualizarEstadoBoton(boton, activo) {
+    if (activo) {
+      boton.classList.remove('btn-outline-primary');
+      boton.classList.add('btn-primary');
+    } else {
+      boton.classList.remove('btn-primary');
+      boton.classList.add('btn-outline-primary');
+    }
+  }
 
-  const cleanHash = (hash) => (hash && hash.startsWith("#")) ? hash.slice(1) : hash;
+ 
+  function marcarBotonActivo(botonSeleccionado) {
+    todosLosBotones.forEach(function(boton) {
+      const esActivo = boton === botonSeleccionado;
+      actualizarEstadoBoton(boton, esActivo);
+    });
+  }
 
-  const applyState = (button, active) => {
-    button.classList.toggle("is-active", active);
-    button.setAttribute("aria-pressed", String(active));
-  };
-
-  const markActive = (current) => {
-    buttons.forEach((button) => applyState(button, button === current));
-  };
-
-  const pickBySlug = (slug) => buttons.find((button) => button.dataset.slug === slug);
-
-  const showExercise = (button) => {
-    if (!button) return;
-
-    const source = button.dataset.src;
-    if (source) {
-      frame.setAttribute("src", source);
-      if (externalLink) {
-        externalLink.setAttribute("href", source);
+  
+  function buscarBotonPorSlug(slug) {
+    for (let i = 0; i < todosLosBotones.length; i++) {
+      if (todosLosBotones[i].dataset.slug === slug) {
+        return todosLosBotones[i];
       }
     }
+    return null;
+  }
 
-    markActive(button);
+  
+  function cargarEjercicio(boton) {
+    if (!boton) return;
 
-    const slug = button.dataset.slug;
-    if (slug) {
-      const targetHash = `#${slug}`;
-      if (targetHash !== window.location.hash) {
-        history.replaceState(null, "", targetHash);
+    const rutaArchivo = boton.dataset.src;
+    
+    if (rutaArchivo) {
+      iframeVisor.src = rutaArchivo;
+    }
+
+    marcarBotonActivo(boton);
+
+    const slugEjercicio = boton.dataset.slug;
+    
+    if (slugEjercicio) {
+      const nuevoHash = '#' + slugEjercicio;
+      
+      if (window.location.hash !== nuevoHash) {
+        history.replaceState(null, '', nuevoHash);
       }
     }
-  };
+  }
 
-  menu.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-src]");
-    if (!button) return;
-    showExercise(button);
-  });
-
-  window.addEventListener("hashchange", () => {
-    const slug = cleanHash(window.location.hash);
-    const matching = pickBySlug(slug);
-    if (matching) {
-      showExercise(matching);
+  
+  menuContenedor.addEventListener('click', function(evento) {
+    const botonPresionado = evento.target.closest('button[data-src]');
+    
+    if (botonPresionado) {
+      cargarEjercicio(botonPresionado);
     }
   });
 
-  const initial = pickBySlug(cleanHash(window.location.hash)) || buttons[0];
-  showExercise(initial);
+  
+  window.addEventListener('hashchange', function() {
+    const slugActual = limpiarHash(window.location.hash);
+    const botonCorrespondiente = buscarBotonPorSlug(slugActual);
+    
+    if (botonCorrespondiente) {
+      cargarEjercicio(botonCorrespondiente);
+    }
+  });
+
+  
+  const hashInicial = limpiarHash(window.location.hash);
+  const botonInicial = buscarBotonPorSlug(hashInicial);
+  
+  if (botonInicial) {
+    cargarEjercicio(botonInicial);
+  } else {
+    cargarEjercicio(todosLosBotones[0]);
+  }
+  
 });

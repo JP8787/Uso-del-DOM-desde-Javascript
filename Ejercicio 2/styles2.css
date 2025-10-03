@@ -1,62 +1,10 @@
-:root {
-  --blue: #0d6efd;
-  --gray-050: #f5f6f8;
-  --gray-200: #d7dbe2;
-  --gray-700: #2f3540;
-  --white: #ffffff;
-}
-
 body {
-  margin: 0;
-  background: var(--gray-050);
-  color: var(--gray-700);
-  font-family: "Segoe UI", Arial, sans-serif;
-  line-height: 1.6;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 32px 16px;
 }
 
-.demo-card {
-  width: min(520px, 100%);
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 6px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.card-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  border-radius: 12px;
-  background: var(--gray-200);
-  color: var(--gray-700);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.titulo {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.card-text {
-  margin: 0;
-}
-
-.action-link {
-  color: var(--blue);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.action-link:hover {
-  text-decoration: underline;
+.card {
+  max-width: 550px;
 }

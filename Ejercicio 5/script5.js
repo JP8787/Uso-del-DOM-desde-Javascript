@@ -1,17 +1,21 @@
-(() => {
-  const principal = document.getElementById("clickMe");
-  const quitador = document.getElementById("remoEvent");
-  if (!principal || !quitador) return;
+document.addEventListener('DOMContentLoaded', configurarEventos);
 
-  const manejarClick = () => {
-    alert("Has presionado el boton Click Me");
-  };
-
-  principal.addEventListener("click", manejarClick);
-
-  quitador.addEventListener("click", () => {
-    principal.removeEventListener("click", manejarClick);
-    quitador.disabled = true;
-    quitador.textContent = "Evento eliminado";
+function configurarEventos() {
+  const botonPrincipal = document.getElementById('clickMe');
+  const botonEliminar = document.getElementById('remoEvent');
+  
+  if (!botonPrincipal || !botonEliminar) return;
+  botonPrincipal.addEventListener('click', mostrarAlerta);
+  
+ 
+  botonEliminar.addEventListener('click', function() {
+    botonPrincipal.removeEventListener('click', mostrarAlerta);
+  
+    this.disabled = true;
+    this.textContent = 'Evento eliminado';
   });
-})();
+}
+
+function mostrarAlerta() {
+  alert('Has presionado el botón Click Me');
+}

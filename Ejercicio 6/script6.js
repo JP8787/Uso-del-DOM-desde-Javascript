@@ -1,62 +1,55 @@
-(() => {
-  const input = document.getElementById("taskText");
-  const addButton = document.getElementById("addTask");
-  const list = document.getElementById("taskList");
+document.addEventListener('DOMContentLoaded', function() {
+  
+  const campoTexto = document.getElementById('taskText');
+  const botonAgregar = document.getElementById('addTask');
+  const listaTareas = document.getElementById('taskList');
 
-  if (!input || !addButton || !list) return;
+  if (!campoTexto || !botonAgregar || !listaTareas) return;
 
-  const crearItem = (texto) => {
-    const elemento = document.createElement("li");
-    elemento.className = "list-group-item d-flex align-items-center justify-content-between";
-
-    const contenedor = document.createElement("div");
-    contenedor.className = "d-flex align-items-center gap-2";
-
-    const etiqueta = document.createElement("span");
-    etiqueta.className = "text";
-    etiqueta.textContent = texto;
-
-    const botonBorrar = document.createElement("button");
-    botonBorrar.className = "btn btn-sm btn-gray";
-    botonBorrar.setAttribute("aria-label", "eliminar");
-    botonBorrar.textContent = "Eliminar";
-
-    contenedor.append(etiqueta);
-    elemento.append(contenedor, botonBorrar);
-
-    botonBorrar.addEventListener("click", () => {
-      const confirmar = confirm("Quieres eliminar esta tarea?");
-      if (confirmar) {
-        elemento.remove();
+  function crearElementoTarea(textoTarea) {
+    const itemLista = document.createElement('li');
+    itemLista.className = 'list-group-item d-flex justify-content-between align-items-center';
+    
+    const spanTexto = document.createElement('span');
+    spanTexto.textContent = textoTarea;
+    const botonBorrar = document.createElement('button');
+    botonBorrar.className = 'btn btn-sm btn-danger';
+    botonBorrar.textContent = 'Eliminar';
+    
+    itemLista.appendChild(spanTexto);
+    itemLista.appendChild(botonBorrar);
+    
+    botonBorrar.addEventListener('click', function() {
+      const confirmar = confirm('¿Quieres eliminar esta tarea?');
+      if (confirmar === true) {
+        itemLista.remove();
       }
     });
+    
+    return itemLista;
+  }
 
-    return elemento;
-  };
-
-  const limpiarEntrada = () => {
-    input.value = "";
-    input.focus();
-  };
-
-  const agregarTarea = () => {
-    const texto = input.value.trim();
-    if (!texto) {
-      input.focus();
+  function agregarTarea() {
+    const textoIngresado = campoTexto.value.trim();
+    
+    if (textoIngresado === '') {
+      campoTexto.focus();
       return;
     }
+    
+    const nuevaTarea = crearElementoTarea(textoIngresado);
+    listaTareas.appendChild(nuevaTarea);
+    
+    campoTexto.value = '';
+    campoTexto.focus();
+  }
 
-    const item = crearItem(texto);
-    list.append(item);
-    limpiarEntrada();
-  };
-
-  addButton.addEventListener("click", agregarTarea);
-
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
+  botonAgregar.addEventListener('click', agregarTarea);
+  campoTexto.addEventListener('keydown', function(evento) {
+    if (evento.key === 'Enter') {
+      evento.preventDefault();
       agregarTarea();
     }
   });
-})();
+  
+});

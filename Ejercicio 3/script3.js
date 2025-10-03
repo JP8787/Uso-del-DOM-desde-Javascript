@@ -1,32 +1,36 @@
-(() => {
-  const contenedor = document.querySelector(".list-panel");
-  if (!contenedor) return;
+window.onload = function() {
+  
+  const contenedorPrincipal = document.getElementById('contenedor');
+  const botonCrear = document.getElementById('crear');
+  const botonEliminar = document.getElementById('eliminar');
+  
+  if (!contenedorPrincipal) return;
 
-  const crearNodo = () => {
-    const parrafo = document.createElement("p");
-    parrafo.className = "mb-0";
-    parrafo.append(document.createTextNode("Este es un parrafo creado dinamicamente"));
+  function generarNuevoParrafo() {
+    const parrafo = document.createElement('p');
+    parrafo.className = 'alert alert-secondary mb-2';
+    
+    const textoParrafo = document.createTextNode('Este es un párrafo creado dinámicamente');
+    parrafo.appendChild(textoParrafo);
+    
     return parrafo;
-  };
-
-  const agregarParrafo = () => {
-    contenedor.append(crearNodo());
-  };
-
-  const quitarPrimero = () => {
-    const primero = contenedor.querySelector("p");
-    if (primero) primero.remove();
-  };
-
-  const acciones = [
-    ["crear", agregarParrafo],
-    ["eliminar", quitarPrimero]
-  ];
-
-  for (const [id, accion] of acciones) {
-    const boton = document.getElementById(id);
-    if (boton) boton.addEventListener("click", accion);
+  }
+  if (botonCrear) {
+    botonCrear.onclick = function() {
+      const nuevoParrafo = generarNuevoParrafo();
+      contenedorPrincipal.appendChild(nuevoParrafo);
+    };
   }
 
-  agregarParrafo();
-})();
+  if (botonEliminar) {
+    botonEliminar.onclick = function() {
+      const primerParrafo = contenedorPrincipal.querySelector('p');
+      
+      if (primerParrafo !== null) {
+        primerParrafo.remove();
+      }
+    };
+  }
+  contenedorPrincipal.appendChild(generarNuevoParrafo());
+  
+};

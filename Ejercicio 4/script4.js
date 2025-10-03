@@ -1,17 +1,25 @@
-(() => {
-  const boton = document.getElementById("remplazar");
-  if (!boton) return;
+document.addEventListener('DOMContentLoaded', inicializarEjercicio);
 
-  const crearSustituto = () => {
-    const nuevo = document.createElement("div");
-    nuevo.className = "alert alert-primary";
-    nuevo.textContent = "Nuevo div";
-    return nuevo;
-  };
+function inicializarEjercicio() {
+  const botonReemplazar = document.getElementById('remplazar');
+  
+  if (botonReemplazar) {
+    botonReemplazar.addEventListener('click', ejecutarReemplazo);
+  }
+}
 
-  boton.addEventListener("click", () => {
-    const actual = document.getElementById("viejo");
-    if (!actual || !actual.parentNode) return;
-    actual.parentNode.replaceChild(crearSustituto(), actual);
-  });
-})();
+function ejecutarReemplazo() {
+  const divAntiguo = document.getElementById('viejo');
+  if (!divAntiguo) return;
+
+  const divNuevo = document.createElement('div');
+  divNuevo.className = 'alert alert-primary mb-3';
+  
+  const textoNuevo = document.createTextNode('Nuevo div');
+  divNuevo.appendChild(textoNuevo);
+  const elementoPadre = divAntiguo.parentElement;
+  
+  if (elementoPadre) {
+    elementoPadre.replaceChild(divNuevo, divAntiguo);
+  }
+}

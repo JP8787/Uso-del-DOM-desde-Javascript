@@ -1,102 +1,46 @@
-:root {
-  --blue: #0d6efd;
-  --gray-050: #f5f6f8;
-  --gray-100: #eceff3;
-  --gray-200: #d7dbe2;
-  --gray-500: #6c757d;
-  --gray-700: #2f3540;
-  --white: #ffffff;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  background: var(--gray-050);
-  color: var(--gray-700);
-  font-family: "Segoe UI", Arial, sans-serif;
-  line-height: 1.6;
+  min-height: 100vh;
 }
 
-.app-header {
-  background: var(--white);
-  border-bottom: 1px solid var(--gray-200);
-}
 
-.app-title {
-  margin: 0;
-  font-size: 1.3rem;
+header h1 {
   font-weight: 600;
-  color: var(--gray-700);
+  color: #212529;
 }
 
-.menu-panel,
-.viewer-panel {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 6px;
+.card {
+  border: 1px solid #dee2e6;
 }
 
-.menu-panel .card-body,
-.viewer-panel .card-body {
-  padding: 20px;
+
+#menu-ejercicio .btn {
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-#menu-ejercicio {
-  display: grid;
-  gap: 10px;
+#menu-ejercicio .btn:hover {
+  transform: translateX(3px);
 }
 
-.menu-item {
-  display: block;
-  padding: 10px 12px;
-  border: 1px solid var(--gray-200);
-  border-radius: 6px;
-  background: var(--white);
-  color: var(--gray-700);
-  font-size: 0.95rem;
+
+#menu-ejercicio .btn-primary {
   font-weight: 600;
-  text-align: left;
-  cursor: pointer;
 }
 
-.menu-item:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
-}
-
-.menu-item.is-active {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: var(--white);
-}
-
-.viewer-panel iframe {
+#visor {
   width: 100%;
   height: 70vh;
-  border: 1px solid var(--gray-200);
-  border-radius: 6px;
-  background: var(--white);
+  background-color: #fff;
 }
 
-.viewer-note {
-  color: var(--gray-500);
-}
-
-.btn-link {
-  color: var(--blue);
-  padding-left: 0;
-}
-
-.btn-link:hover,
-.btn-link:focus {
-  color: var(--blue);
+@media (max-width: 768px) {
+  #visor {
+    height: 60vh;
+  }
 }
 
 @media (max-width: 576px) {
-  .viewer-panel iframe {
-    height: 60vh;
+  #visor {
+    height: 50vh;
   }
 }

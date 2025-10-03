@@ -1,67 +1,10 @@
-:root {
-  --blue: #0d6efd;
-  --gray-050: #f5f6f8;
-  --gray-200: #d7dbe2;
-  --gray-700: #2f3540;
-  --white: #ffffff;
-}
-
 body {
-  margin: 0;
-  background: var(--gray-050);
-  color: var(--gray-700);
-  font-family: "Segoe UI", Arial, sans-serif;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 16px;
 }
 
-.panel {
-  width: min(500px, 100%);
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 6px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  text-align: center;
-}
-
-.button-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.pill {
-  border: 1px solid var(--gray-200);
-  border-radius: 4px;
-  padding: 10px 18px;
-  font-weight: 600;
-  cursor: pointer;
-  background: var(--white);
-  color: var(--gray-700);
-}
-
-.pill.primary {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: var(--white);
-}
-
-.pill.neutral {
-  background: var(--gray-200);
-}
-
-.pill:disabled {
-  opacity: 0.75;
-  cursor: default;
-}
-
-.hint {
-  margin: 0;
+.card {
+  max-width: 550px;
 }
